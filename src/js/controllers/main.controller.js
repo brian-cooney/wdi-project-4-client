@@ -11,6 +11,7 @@ function MainCtrl($rootScope, CurrentUserService, $state) {
   $rootScope.$on('LoggedIn', () => {
     vm.user = CurrentUserService.currentUser;
     vm.loggedIn = true;
+    $state.go('headlinesIndex');
   });
   vm.logout = () => {
     vm.loggedIn = false;

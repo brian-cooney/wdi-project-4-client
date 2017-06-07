@@ -17,14 +17,15 @@
     <img src="http://tachyons.io/img/logo.jpg" class="dib w2 h2 br-100" alt="Site Name">
   </a>
   <div class="dtc v-mid w-75 tr">
-    <a class="link dim dark-gray f6 f5-ns dib mr3 mr4-ns" title="Store" ng-hide="main.loggedIn" ui-sref="login">Login</a>
-    <a class="link dim dark-gray f6 f5-ns dib" title="Contact" ng-hide="main.loggedIn" ui-sref="register">Register</a>
+    <a class="link dim dark-gray f6 f5-ns dib mr3 mr4-ns" ng-hide="main.loggedIn" ui-sref="login">Login</a>
+    <a class="link dim dark-gray f6 f5-ns dib" ng-hide="main.loggedIn" ui-sref="register">Register</a>
+    <a class="link dim dark-gray f6 f5-ns dib" ng-show="main.loggedIn" ng-click="main.logout()">Log out</a>
   </div>
 </nav>
 
-<main ui-view>
-  
-</main>
+<div ui-view>
+
+</div>
 
 </body>
 </html>
