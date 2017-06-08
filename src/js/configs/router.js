@@ -29,6 +29,12 @@ function Router($stateProvider, $locationProvider, $urlRouterProvider) {
     templateUrl: '/js/views/headlines/index.html',
     controller: 'HeadlinesIndexCtrl',
     controllerAs: 'headlines'
+  })
+  .state('headlinesShow', {
+    url: '/headlines/:id',
+    templateUrl: '/js/views/headlines/show.html',
+    controller: 'HeadlinesShowCtrl',
+    controllerAs: 'headlines'
   });
 
   $urlRouterProvider.otherwise('/');

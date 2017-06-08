@@ -1,0 +1,39 @@
+<h1 class="mw6 center">Show page</h1>
+
+<section class="mw7 center">
+  <h2 class="athelas ph3 ph0-l">News</h2>
+  <article class="pv4 bt bb b--black-10 ph3 ph0-l">
+    <div class="flex flex-column flex-row-ns">
+      <div class="w-100 w-60-ns pr3-ns order-2 order-1-ns">
+        <h1 class="f3 athelas mt0 lh-title">{{ headlines.headline.title }}</h1>
+        <p class="f5 f4-l lh-copy athelas">
+          {{ headlines.headline.content }}
+        </p>
+      </div>
+      <div class="pl3-ns order-1 order-2-ns mb4 mb0-ns w-100 w-40-ns">
+        <img src="{{ headlines.headline.image }}" class="db" alt="Photo of a dimly lit room with a computer interface terminal.">
+      </div>
+    </div>
+      <p class="f6 lh-copy gray mv0">By <span class="ttu">{{ headlines.headline.source }}</span></p>
+    <time class="f6 db gray">{{ headlines.headline.date }}</time>
+  </article>
+</section>
+
+
+<section class="mw6 center">
+  <article ng-repeat="reaction in headlines.headline.reactions">
+    <a class="link dt w-100 bb b--black-10 pb2 mt2 dim blue" ui-sref="headlinesShow({ id: headline.id})">
+      <div class="dtc w3">
+        <img src="{{ headline.image }}" class="db w-100"/>
+      </div>
+      <div class="dtc v-top pl2">
+        <h1 class="f6 f5-ns fw6 lh-title black mv0">{{ reaction.user }}</h1>
+        <h2 class="f6 fw4 mt2 mb0 black-60">{{ reaction.headline }}</h2>
+        <dl class="mt2 f6">
+          <dt class="clip">Price</dt>
+          <dd class="ml0">{{ reaction.id }}</dd>
+        </dl>
+      </div>
+    </a>
+  </article>
+</section>
