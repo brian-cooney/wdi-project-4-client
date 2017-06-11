@@ -5,13 +5,12 @@ angular
 
 MainCtrl.$inject = ['$rootScope', 'CurrentUserService', '$state'];
 function MainCtrl($rootScope, CurrentUserService, $state) {
-  console.log('MAIN CTRL FIRING');
   const vm = this;
   CurrentUserService.getUser();
   $rootScope.$on('LoggedIn', () => {
     vm.user = CurrentUserService.currentUser;
     vm.loggedIn = true;
-    $state.go('headlinesIndex');
+    // $state.go('headlinesIndex');
   });
   vm.logout = () => {
     vm.loggedIn = false;

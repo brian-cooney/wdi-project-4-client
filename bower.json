@@ -19,6 +19,5 @@
     "angular-resource": "^1.6.4",
     "angular-ui-router": "^1.0.3",
     "angular-jwt": "^0.1.9"
-
   }
 }

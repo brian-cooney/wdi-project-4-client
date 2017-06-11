@@ -5,16 +5,20 @@
   <link rel="stylesheet" href="https://unpkg.com/tachyons@4.7.0/css/tachyons.min.css"/>
   <base href="/">
   <title>Angular Stack Setup</title>
+  <script src="js/audiodisplay.js"></script>
+  <script src="js/recorderjs/recorder.js"></script>
+  <script type="text/javascript" src="https://static.filestackapi.com/v3/filestack.js"></script>
   <!-- inject:js -->
   <!-- endinject -->
   <!-- inject:css -->
   <!-- endinject -->
+
 </head>
 <body ng-controller="MainCtrl as main">
 
 <nav class="dt w-100 border-box pa3 ph5-ns">
   <a class="dtc v-mid mid-gray link dim w-25" ui-sref="home" title="Home">
-    <img src="http://tachyons.io/img/logo.jpg" class="dib w2 h2 br-100" alt="Site Name">
+    <img src="https://pbs.twimg.com/profile_images/724342663714082816/Lhitj7_a.jpg" class="dib w3 h3 br-100" alt="Site Name">
   </a>
   <div class="dtc v-mid w-75 tr">
     <a class="link dim dark-gray f6 f5-ns dib mr3 mr4-ns" ng-hide="main.loggedIn" ui-sref="login">Login</a>

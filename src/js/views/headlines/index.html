@@ -1,20 +1,20 @@
-<h1 class="mw6 center">Headlines</h1>
-
-<main class="mw6 center">
-  <article ng-repeat="headline in headlines.headlines">
-    <a class="link dt w-100 bb b--black-10 pb2 mt2 dim blue" ui-sref="headlinesShow({ id: headline.id})">
-      <div class="dtc w3">
-        <img src="{{ headline.image }}" class="db w-100"/>
+<section class="mw7 center">
+  <h2 class="athelas ph3 ph0-l">News</h2>
+  <article class="pv4 bt b--black-10 ph3 ph0-l" ng-repeat="headline in headlines.headlines">
+    <a class="link dt w-100 b--black-20 pb2 mt2"  ui-sref="headlinesShow({ id: headline.id})">
+    <div class="flex flex-column flex-row-ns">
+      <div class="w-100 w-60-ns pr3-ns order-2 order-1-ns">
+        <h1 class="f3 athelas mt0 lh-title">{{ headline.title }}</h1>
+        <p class="f5 f4-l lh-copy athelas">
+          {{ headline.content }}
+        </p>
       </div>
-      <div class="dtc v-top pl2">
-        <h1 class="f6 f5-ns fw6 lh-title black mv0">{{ headline.title }}</h1>
-        <h2 class="f6 fw4 mt2 mb0 black-60">{{ headline.content }}</h2>
-        <dl class="mt2 f6">
-          <dt class="clip">Price</dt>
-          <dd class="ml0">{{ headline.source}}</dd>
-        </dl>
+      <div class="pl3-ns order-1 order-2-ns mb4 mb0-ns w-100 w-40-ns">
+        <img src="{{ headline.image }}" class="db" alt="">
       </div>
-
+    </div>
+    <p class="f6 lh-copy gray mv0">By <span class="ttu">{{ headline.source }}</span></p>
+    <time class="f6 db gray">{{ headline.date }}</time>
     </a>
   </article>
-</main>
+</section>

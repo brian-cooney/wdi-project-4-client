@@ -19,21 +19,44 @@
   </article>
 </section>
 
+<div id="viz">
+	<canvas id="analyser" width="1024" height="500"></canvas>
+	<canvas id="wavedisplay" width="1024" height="500"></canvas>
+</div>
+<div id="controls">
+	<a id="record" ng-click="headlines.toggleRecording($event);">Record</a>
+	<a id="save" href="#" class="">Save</a>
+</div>
 
-<section class="mw6 center">
-  <article ng-repeat="reaction in headlines.headline.reactions">
+
+  <ul class="list pl0 mt0 measure center">
+    <li
+      class="flex items-center lh-copy pa3 ph0-l bb b--black-10" ng-repeat="reaction in headlines.headline.reactions">
+        <img class="w2 h2 w3-ns h3-ns br-100" src="http://tachyons.io/img/avatar-mrmrs.jpg" />
+        <div class="pl3 flex-auto">
+          <audio id="music" preload="true" src="{{ reaction.url }}"></audio>
+        <div id="audioplayer">
+          <button id="pButton" class="play"></button>
+          <div id="timeline">
+                <div id="playhead"></div>
+          </div>
+        </div>
+          <span class="f6 db black-70">Mrmrs</span>
+          <span class="f6 db black-70">Medium Hexagon, LLC</span>
+        </div>
+    </li>
+  </ul>
+
+
+
+
+  <!-- <article ng-repeat="reaction in headlines.headline.reactions">
     <a class="link dt w-100 bb b--black-10 pb2 mt2 dim blue" ui-sref="headlinesShow({ id: headline.id})">
-      <div class="dtc w3">
-        <img src="{{ headline.image }}" class="db w-100"/>
-      </div>
       <div class="dtc v-top pl2">
-        <h1 class="f6 f5-ns fw6 lh-title black mv0">{{ reaction.user }}</h1>
-        <h2 class="f6 fw4 mt2 mb0 black-60">{{ reaction.headline }}</h2>
         <dl class="mt2 f6">
-          <dt class="clip">Price</dt>
-          <dd class="ml0">{{ reaction.id }}</dd>
+          <audio controls src="{{ reaction.url }}"></audio>
         </dl>
       </div>
     </a>
-  </article>
+  </article> -->
 </section>

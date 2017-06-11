@@ -26,13 +26,23 @@ const validateLocalJs = () => {
 
 const fetchLocalJs = () => {
   return validateLocalJs()
-    .pipe(order([config.main.js,config.selectors.js]))
+    .pipe(order([
+      config.main.js,
+      config.selectors.js
+    ]))
     .pipe(babel({
       presets: ['es2015']
     }));
 };
 
+const fetchLocalVendorJs = () => {
+  return gulp.src(`${config.srcDir}vendor/js/${config.selectors.js}`)
+    .pipe(gulp.dest(config.dest.js));
+};
+
 const buildJs = () => {
+  fetchLocalVendorJs();
+  
   return eventStream.merge(
     fetchVendorJs(),
     fetchLocalJs()
