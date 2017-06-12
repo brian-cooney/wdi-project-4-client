@@ -14,49 +14,39 @@
         <img src="{{ headlines.headline.image }}" class="db" alt="Photo of a dimly lit room with a computer interface terminal.">
       </div>
     </div>
-      <p class="f6 lh-copy gray mv0">By <span class="ttu">{{ headlines.headline.source }}</span></p>
+    <p class="f6 lh-copy gray mv0">By <span class="ttu">{{ headlines.headline.source }}</span></p>
     <time class="f6 db gray">{{ headlines.headline.date }}</time>
   </article>
 </section>
 
-<div id="viz">
-	<canvas id="analyser" width="1024" height="500"></canvas>
-	<canvas id="wavedisplay" width="1024" height="500"></canvas>
-</div>
-<div id="controls">
-	<a id="record" ng-click="headlines.toggleRecording($event);">Record</a>
-	<a id="save" href="#" class="">Save</a>
+<div class="pv4 b--black-10 ph3 ph0-l" id="viz">
+  <h2>Hit record to leave a comment</h2>
+  <canvas id="analyser" width="1024" height="500"></canvas>
+  <a id="record" ng-click="headlines.toggleRecording($event);"><img src="http://www.free-icons-download.net/images/record-button-icon-64949.png" alt=""></a>
+
 </div>
 
 
-  <ul class="list pl0 mt0 measure center">
-    <li
-      class="flex items-center lh-copy pa3 ph0-l bb b--black-10" ng-repeat="reaction in headlines.headline.reactions">
-        <img class="w2 h2 w3-ns h3-ns br-100" src="http://tachyons.io/img/avatar-mrmrs.jpg" />
-        <div class="pl3 flex-auto">
-          <audio id="music" preload="true" src="{{ reaction.url }}"></audio>
-        <div id="audioplayer">
-          <button id="pButton" class="play"></button>
-          <div id="timeline">
-                <div id="playhead"></div>
-          </div>
-        </div>
-          <span class="f6 db black-70">Mrmrs</span>
-          <span class="f6 db black-70">Medium Hexagon, LLC</span>
-        </div>
-    </li>
-  </ul>
+<ul class="list pl0 mt0 measure center">
+  <li
+  class="flex items-center lh-copy pa3 ph0-l bb b--black-10" ng-repeat="reaction in headlines.headline.reactions track by $index">
+    <img class="w2 h2 w3-ns h3-ns br-100" src="https://cdn3.iconfinder.com/data/icons/business-round-flat-vol-1-1/36/user_account_profile_avatar_person_student_male-512.png"/>
+    <div class="pl3 flex-auto">
+      <audio id="reaction{{$index}}" src="{{ reaction.url }}"></audio>
+      <button class="playpause" ng-class="{ 'pause': headlines.activeClass === 'reaction{{$index}}', 'play': headlines.activeClass !== 'reaction{{$index}}' }" ng-click="headlines.play($index)"></button>
+    </div>
+    <span class="f6 db black-70">Username</span>
+    <span class="f6 db black-70">Date</span>
+  </li>
+</ul>
 
-
-
-
-  <!-- <article ng-repeat="reaction in headlines.headline.reactions">
-    <a class="link dt w-100 bb b--black-10 pb2 mt2 dim blue" ui-sref="headlinesShow({ id: headline.id})">
-      <div class="dtc v-top pl2">
-        <dl class="mt2 f6">
-          <audio controls src="{{ reaction.url }}"></audio>
-        </dl>
-      </div>
-    </a>
-  </article> -->
-</section>
+<!-- <article ng-repeat="reaction in headlines.headline.reactions">
+<a class="link dt w-100 bb b--black-10 pb2 mt2 dim blue" ui-sref="headlinesShow({ id: headline.id})">
+<div class="dtc v-top pl2">
+<dl class="mt2 f6">
+<audio controls src="{{ reaction.url }}"></audio>
+</dl>
+</div>
+</a>
+</article> -->
+<!-- </section> -->

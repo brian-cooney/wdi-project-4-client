@@ -7,7 +7,6 @@ function HeadlinesIndexCtrl(HeadlineFactory) {
   const vm = this;
 
 
-
 //Replace this query with external API call. 
 
   HeadlineFactory.query()

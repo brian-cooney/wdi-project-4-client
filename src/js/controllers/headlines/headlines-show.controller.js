@@ -2,8 +2,8 @@ angular
 .module('myApp')
 .controller('HeadlinesShowCtrl', HeadlinesShowCtrl);
 
-HeadlinesShowCtrl.$inject = ['HeadlineFactory', '$stateParams', '$http'];
-function HeadlinesShowCtrl(HeadlineFactory, $stateParams, $http) {
+HeadlinesShowCtrl.$inject = ['HeadlineFactory', 'ReactionFactory', '$stateParams', '$http', '$window', '$scope'];
+function HeadlinesShowCtrl(HeadlineFactory, ReactionFactory, $stateParams, $http, $window, $scope) {
   const vm = this;
 
   //Replace this query with external API call.
@@ -13,6 +13,36 @@ function HeadlinesShowCtrl(HeadlineFactory, $stateParams, $http) {
     vm.headline = res;
   });
 
+  /***************************************************************************/
+
+  vm.reactions = {};
+
+  //Play and Pause
+  vm.play = play;
+  function play(id) {
+
+    id = `reaction${id}`;
+    const audio = document.getElementById(id);
+    if (audio && !audio.paused) {
+      vm.activeClass = null;
+      audio.pause();
+    } else {
+      // Pause all audio
+      var audios = document.getElementsByTagName('audio');
+      for(var i = 0, len = audios.length; i < len;i++){
+        audios[i].pause();
+      }
+      
+      vm.activeClass = id;
+      audio.play();
+    }
+  }
+
+  /***************************************************************************/
+
+
+
+
   window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
   var audioContext = new AudioContext();
@@ -20,10 +50,10 @@ function HeadlinesShowCtrl(HeadlineFactory, $stateParams, $http) {
   var realAudioInput = null;
   var inputPoint = null;
   var audioRecorder = null;
-  var rafID = null;
+  // var rafID = null;
   var analyserContext = null;
   var canvasWidth, canvasHeight;
-  var recIndex = 0;
+  // var recIndex = 0;
 
   vm.saveAudio = saveAudio;
   function saveAudio() {
@@ -32,10 +62,10 @@ function HeadlinesShowCtrl(HeadlineFactory, $stateParams, $http) {
     // audioRecorder.exportMonoWAV( doneEncoding );
   }
 
-  function gotBuffers( buffers ) {
-    var canvas = document.getElementById('wavedisplay');
+  function gotBuffers(buffers) {
+    // var canvas = document.getElementById('wavedisplay');
 
-    drawBuffer( canvas.width, canvas.height, canvas.getContext('2d'), buffers[0] );
+    // drawBuffer( canvas.width, canvas.height, canvas.getContext('2d'), buffers[0] );
 
     // the ONLY time gotBuffers is called is right after a new recording is completed -
     // so here's where we should set up the download.
@@ -43,37 +73,38 @@ function HeadlinesShowCtrl(HeadlineFactory, $stateParams, $http) {
   }
 
   function doneEncoding( blob ) {
-    console.log(blob)
+    const filestack = $window.filestack;
+    var client = filestack.init('AuFKUETf9TLCMxLFaKwS0z');
 
-    const data = new FormData();
-    // data.append('fileUpload', blob, Date.now().toString() + '.mp3');
-
-    $http({
-      method: 'post',
-      url: 'https://www.filepicker.io/api/store/S3?key=AuFKUETf9TLCMxLFaKwS0z',
-      formData: blob
+    client
+    .upload(blob)
+    .then(response => {
+      return ReactionFactory.save({
+        headline_id: $stateParams.id,
+        url: response.url
+      }).$promise;
     })
     .then(data => {
-      console.log(data)
-    }, err => {
-      console.error(err);
+      console.log('FINISHED', data);
+      vm.headline = HeadlineFactory.get($stateParams);
     })
-    // Recorder.setupDownload( blob, "myRecording" + ((recIndex<10)?"0":"") + recIndex + ".wav" );
-    // recIndex++;
+    .catch(error => {
+      console.error(error);
+    });
   }
 
   vm.toggleRecording = toggleRecording;
   function toggleRecording($event) {
     const e = $event.currentTarget;
-    if (e.classList.contains("recording")) {
+    if (e.classList.contains('recording')) {
       // stop recording
       audioRecorder.stop();
-      e.classList.remove("recording");
+      e.classList.remove('recording');
       audioRecorder.getBuffers( gotBuffers );
     } else {
       // start recording
       if (!audioRecorder) return;
-      e.classList.add("recording");
+      e.classList.add('recording');
       audioRecorder.clear();
       audioRecorder.record();
     }
@@ -96,7 +127,7 @@ function HeadlinesShowCtrl(HeadlineFactory, $stateParams, $http) {
 
   function updateAnalysers(time) {
     if (!analyserContext) {
-      var canvas = document.getElementById("analyser");
+      var canvas = document.getElementById('analyser');
       canvasWidth = canvas.width;
       canvasHeight = canvas.height;
       analyserContext = canvas.getContext('2d');
@@ -134,7 +165,7 @@ function HeadlinesShowCtrl(HeadlineFactory, $stateParams, $http) {
   }
 
   function toggleMono() {
-    if (audioInput != realAudioInput) {
+    if (audioInput !== realAudioInput) {
       audioInput.disconnect();
       realAudioInput.disconnect();
       audioInput = realAudioInput;
@@ -158,7 +189,7 @@ function HeadlinesShowCtrl(HeadlineFactory, $stateParams, $http) {
 
     analyserNode = audioContext.createAnalyser();
     analyserNode.fftSize = 2048;
-    inputPoint.connect( analyserNode );
+    inputPoint.connect(analyserNode);
 
     audioRecorder = new Recorder( inputPoint );
 
@@ -179,21 +210,20 @@ function HeadlinesShowCtrl(HeadlineFactory, $stateParams, $http) {
 
     navigator.getUserMedia(
       {
-        "audio": {
-          "mandatory": {
-            "googEchoCancellation": "false",
-            "googAutoGainControl": "false",
-            "googNoiseSuppression": "false",
-            "googHighpassFilter": "false"
+        'audio': {
+          'mandatory': {
+            'googEchoCancellation': 'false',
+            'googAutoGainControl': 'false',
+            'googNoiseSuppression': 'false',
+            'googHighpassFilter': 'false'
           },
-          "optional": []
-        },
+          'optional': []
+        }
       }, gotStream, function(e) {
         alert('Error getting audio');
         console.log(e);
       });
     }
 
-    window.addEventListener('load', initAudio );
-
+    $window.addEventListener('load', initAudio);
   }

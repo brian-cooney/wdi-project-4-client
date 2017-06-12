@@ -9,11 +9,11 @@
 }
 
 canvas {
-	display: inline-block;
-	background: #202020;
-	width: 200px;
-	height: 45%;
-	box-shadow: 0px 0px 10px blue;
+	// display: inline-block;
+	// background: #202020;
+	width: 400px;
+	height: 60px;
+	border: solid 2px grey;
 }
 #controls {
 	display: flex;
@@ -23,12 +23,17 @@ canvas {
 	height: 20%;
 	width: 100%;
 }
-#record { height: 15vh; }
+#record {
+  float: left;
+  height: 30px;
+  width: 30px;
+            }
 #record.recording {
 	background: red;
-	background: -webkit-radial-gradient(center, ellipse cover, #ff0000 0%,lightgrey 75%,lightgrey 100%,#7db9e8 100%);
-	background: -moz-radial-gradient(center, ellipse cover, #ff0000 0%,lightgrey 75%,lightgrey 100%,#7db9e8 100%);
-	background: radial-gradient(center, ellipse cover, #ff0000 0%,lightgrey 75%,lightgrey 100%,#7db9e8 100%);
+  border-radius: 10%;
+  height: 15px;
+  width: 30px;
+
 }
 #save, #save img { height: 10vh; }
 #save { opacity: 0.25;}
@@ -54,7 +59,7 @@ canvas {
   border: solid;
 }
 
-#pButton{
+.playpause {
     height:60px;
     width: 60px;
     border: none;
@@ -65,8 +70,8 @@ canvas {
     outline:none;
 }
 
-.play{background: url('http://www.alexkatz.me/codepen/img/play.png') ;}
-.pause{background: url('http://www.alexkatz.me/codepen/img/pause.png') ;}
+.play{background-image: url('http://www.alexkatz.me/codepen/img/play.png') ;}
+.pause{background-image: url('http://www.alexkatz.me/codepen/img/pause.png') ;}
 
 #timeline{
 	width: 400px;
@@ -85,3 +90,7 @@ canvas {
 	background: rgba(0, 0, 0,1);
 
 }
+
+
+
+//record button
