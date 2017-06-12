@@ -1,22 +1,26 @@
 <main class="pa4 black-80">
-  <form class="measure center" ng-submit="Login.login()">
+  <form class="measure center" ng-submit="Register.register()">
     <fieldset id="sign_up" class="ba b--transparent ph0 mh0">
-      <legend class="f4 fw6 ph0 mh0">Login</legend>
+      <legend class="f4 fw6 ph0 mh0">Register</legend>
       <div class="mt3">
-        <label class="db fw6 lh-copy f6" for="email-address">Username</label>
+        <label class="db fw6 lh-copy f6">Username</label>
         <input class="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" type="text" ng-model="Register.user.user_name" name="user_name" placeholder="Enter username">
       </div>
       <div class="mt3">
-        <label class="db fw6 lh-copy f6" for="email-address">Email</label>
+        <label class="db fw6 lh-copy f6">Email</label>
         <input class="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" type="email" ng-model="Register.user.email" name="email" placeholder="Enter email">
       </div>
+      <div class="mt3">
+        <label class="db fw6 lh-copy f6">Avatar URL</label>
+        <input class="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" type="text" ng-model="Register.user.image" name="image" placeholder="Enter avatar url">
+      </div>
       <div class="mv3">
-        <label class="db fw6 lh-copy f6" for="password">Password</label>
+        <label class="db fw6 lh-copy f6">Password</label>
         <input class="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" type="password" ng-model="Register.user.password" name="password" placeholder="Password">
       </div>
       <div class="mv3">
-        <label class="db fw6 lh-copy f6" for="password">Password confirmation</label>
-        <input class="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" type="password" name="password" id="password" ng-model="Login.user.password">
+        <label class="db fw6 lh-copy f6">Password confirmation</label>
+        <input class="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" type="password" name="password_confirmation" ng-model="Login.user.password_confirmation">
       </div>
 
     </fieldset>

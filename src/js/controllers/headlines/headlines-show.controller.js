@@ -7,11 +7,22 @@ function HeadlinesShowCtrl(HeadlineFactory, ReactionFactory, $stateParams, $http
   const vm = this;
 
   //Replace this query with external API call.
-  HeadlineFactory.get($stateParams)
-  .$promise
-  .then(res => {
-    vm.headline = res;
-  });
+  vm.loadPage =  () => {
+    HeadlineFactory.get($stateParams)
+    .$promise
+    .then(res => {
+      vm.headline = res;
+    });
+  };
+
+  vm.reactionsDelete = (id) => {
+    console.log('delete function');
+    ReactionFactory.delete({ id: id })
+    .$promise
+    .then(() => {
+      vm.loadPage();
+    });
+  };
 
   /***************************************************************************/
 
@@ -32,7 +43,7 @@ function HeadlinesShowCtrl(HeadlineFactory, ReactionFactory, $stateParams, $http
       for(var i = 0, len = audios.length; i < len;i++){
         audios[i].pause();
       }
-      
+
       vm.activeClass = id;
       audio.play();
     }
@@ -226,4 +237,6 @@ function HeadlinesShowCtrl(HeadlineFactory, ReactionFactory, $stateParams, $http
     }
 
     $window.addEventListener('load', initAudio);
+
+    vm.loadPage();
   }

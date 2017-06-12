@@ -1,7 +1,5 @@
-<h1 class="mw6 center">Show page</h1>
-
 <section class="mw7 center">
-  <h2 class="athelas ph3 ph0-l">News</h2>
+  <h2 class="athelas ph3 ph0-l"></h2>
   <article class="pv4 bt bb b--black-10 ph3 ph0-l">
     <div class="flex flex-column flex-row-ns">
       <div class="w-100 w-60-ns pr3-ns order-2 order-1-ns">
@@ -11,7 +9,7 @@
         </p>
       </div>
       <div class="pl3-ns order-1 order-2-ns mb4 mb0-ns w-100 w-40-ns">
-        <img src="{{ headlines.headline.image }}" class="db" alt="Photo of a dimly lit room with a computer interface terminal.">
+        <img src="{{ headlines.headline.image }}" class="db" alt="Photo of a dimly lit room with a computer interface terminal." style="border-radius: 5px">
       </div>
     </div>
     <p class="f6 lh-copy gray mv0">By <span class="ttu">{{ headlines.headline.source }}</span></p>
@@ -19,26 +17,33 @@
   </article>
 </section>
 
-<div class="pv4 b--black-10 ph3 ph0-l" id="viz">
-  <h2>Hit record to leave a comment</h2>
-  <canvas id="analyser" width="1024" height="500"></canvas>
-  <a id="record" ng-click="headlines.toggleRecording($event);"><img src="http://www.free-icons-download.net/images/record-button-icon-64949.png" alt=""></a>
+<ul class="list pl0 mt0 measure center">
+  <h3>Press record to leave a reaction</h3>
+  <li class="flex items-center lh-copy pa3 ph0-l bb b--black-10">
 
-</div>
+    <canvas id="analyser" ></canvas>
+    <a id="record" ng-click="headlines.toggleRecording($event);"><img src="http://iconshow.me/media/images/ui/ios7-icons/png/512/mic.png" alt=""></a>
 
+  </li>
+</ul>
 
 <ul class="list pl0 mt0 measure center">
   <li
   class="flex items-center lh-copy pa3 ph0-l bb b--black-10" ng-repeat="reaction in headlines.headline.reactions track by $index">
-    <img class="w2 h2 w3-ns h3-ns br-100" src="https://cdn3.iconfinder.com/data/icons/business-round-flat-vol-1-1/36/user_account_profile_avatar_person_student_male-512.png"/>
+    <img class="w2 h2 w3-ns h3-ns br-100" ng-src="{{reaction.user.image}}"/>
     <div class="pl3 flex-auto">
       <audio id="reaction{{$index}}" src="{{ reaction.url }}"></audio>
       <button class="playpause" ng-class="{ 'pause': headlines.activeClass === 'reaction{{$index}}', 'play': headlines.activeClass !== 'reaction{{$index}}' }" ng-click="headlines.play($index)"></button>
+      <span class="f8  black-70">{{ reaction.user.user_name }}</span><br>
+      <span class="f6  black-70">{{ reaction.created_at | date: medium }}</span>
     </div>
-    <span class="f6 db black-70">Username</span>
-    <span class="f6 db black-70">Date</span>
+    <!-- {{reaction.id}} -->
+    <a href="javascript:void(0)" ng-click="headlines.reactionsDelete(reaction.id)">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8RUJd8ibu7O-tc-aJfB8agL_wEGx6CXlRqP5RtXUR-bQYVtgI" style="height: 30px; width: 30px" alt="">
+    </a>
   </li>
 </ul>
+
 
 <!-- <article ng-repeat="reaction in headlines.headline.reactions">
 <a class="link dt w-100 bb b--black-10 pb2 mt2 dim blue" ui-sref="headlinesShow({ id: headline.id})">

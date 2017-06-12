@@ -12,7 +12,7 @@ function LoginCtrl(UserFactory, CurrentUserService, $state) {
     .then(user => {
       console.log(user);
       CurrentUserService.getUser();
-      $state.go('home');
+      $state.go('headlinesIndex');
     }, err => {
       console.log(err, 'error in login controller');
     });
