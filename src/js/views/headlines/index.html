@@ -4,8 +4,8 @@
     <a class="link dt w-100 b--black-20 pb2 mt2"  ui-sref="headlinesShow({ id: headline.id})">
     <div class="flex flex-column flex-row-ns">
       <div class="w-100 w-60-ns pr3-ns order-2 order-1-ns">
-        <h1 class="f3 athelas mt0 lh-title">{{ headline.title }}</h1>
-        <p class="f5 f4-l lh-copy athelas">
+        <h1 class="f3 athelas mt0 lh-title link dim black">{{ headline.title }}</h1>
+        <p class="f5 f4-l lh-copy athelas link dim black">
           {{ headline.content }}
         </p>
       </div>
@@ -13,7 +13,7 @@
         <img src="{{ headline.image }}" class="db" alt="">
       </div>
     </div>
-    <p class="f6 lh-copy gray mv0">By <span class="ttu">{{ headline.source }}</span></p>
+    <p class="f6 lh-copy gray mv0 link dim black">By <span class="ttu">{{ headline.source }}</span></p>
     <time class="f6 db gray">{{ headline.date }}</time>
     </a>
   </article>
