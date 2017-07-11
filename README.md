@@ -1,3 +1,17 @@
+Off the cuff 
+
+<img width="1135" alt="off the cuff" src="https://user-images.githubusercontent.com/25333173/28066984-2a66f3fe-6637-11e7-9ab2-7e211b4c5ee3.png">
+
+# Off the Cuff
+
+For my final project I wanted to work with and manipulate audio. I chose to make an app where a user can react to a news story by leaving a recorded message instead of the usual text comments. This was a fun project setting up Rails 5 as pure API and using AngularJS on the client side. I used a cloud product called filestack to push the recorded audio into which would then provided an URL back for immediate playback.  
+
+
+<img width="789" alt="off the cuff recording" src="https://user-images.githubusercontent.com/25333173/28066983-2a633174-6637-11e7-8898-d09cf4995163.png">
+
+
+
+
 ### Using this Angular Gulp Setup
 
 To get setup with the starter-code, you first need to run:
